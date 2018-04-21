@@ -1,7 +1,7 @@
 FROM openjdk:8-jre-alpine
 
-ARG MKGMAP_VERSION=r3973
-ARG SPLITTER_VERSION=r583
+ARG MKGMAP_VERSION=r4171
+ARG SPLITTER_VERSION=r591
 
 RUN apk add --no-cache wget libarchive-tools
 
