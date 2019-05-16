@@ -1,9 +1,9 @@
 FROM openjdk:8-jre-alpine
 
-ARG MKGMAP_VERSION=r4171
-ARG SPLITTER_VERSION=r591
+ARG MKGMAP_VERSION=r4286
+ARG SPLITTER_VERSION=r592
 
-RUN apk add --no-cache wget libarchive-tools
+RUN apk --update add --no-cache libarchive-tools && rm -rf /var/cache/apk/*
 
 RUN wget -q -O - http://www.mkgmap.org.uk/download/mkgmap-$MKGMAP_VERSION.zip | bsdtar -xvf-  \
 	&& mv mkgmap-$MKGMAP_VERSION /mkgmap \
