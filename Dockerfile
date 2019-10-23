@@ -1,6 +1,6 @@
 FROM openjdk:8-jre-alpine
 
-ARG MKGMAP_VERSION=r4286
+ARG MKGMAP_VERSION=r4315
 ARG SPLITTER_VERSION=r592
 
 RUN apk --update add --no-cache libarchive-tools && rm -rf /var/cache/apk/*
