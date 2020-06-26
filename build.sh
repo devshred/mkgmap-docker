@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CURRENT_TAG=1.6
+CURRENT_TAG=1.7
 
 docker build -t devshred/mkgmap .
 docker tag devshred/mkgmap devshred/mkgmap:$CURRENT_TAG
