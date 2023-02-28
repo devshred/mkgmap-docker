@@ -1,7 +1,7 @@
 FROM ubuntu AS builder
 
-ARG MKGMAP_VERSION=r4717
-ARG SPLITTER_VERSION=r602
+ARG MKGMAP_VERSION=r4905
+ARG SPLITTER_VERSION=r653
 
 WORKDIR /build
 RUN apt-get update && apt-get install -y wget unzip \
