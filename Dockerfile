@@ -1,6 +1,6 @@
 FROM ubuntu AS builder
 
-ARG MKGMAP_VERSION=r4905
+ARG MKGMAP_VERSION=r4909
 ARG SPLITTER_VERSION=r653
 
 WORKDIR /build
@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y wget unzip \
     && unzip splitter-$SPLITTER_VERSION.zip \
     && mv splitter-$SPLITTER_VERSION splitter
 
-FROM openjdk:11-jre-slim
+FROM eclipse-temurin:17-jre
 COPY --from=builder /build/mkgmap //mkgmap
 COPY --from=builder /build/splitter /splitter
 
