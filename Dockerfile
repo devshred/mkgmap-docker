@@ -1,7 +1,7 @@
 FROM ubuntu AS builder
 
-ARG MKGMAP_VERSION=r4909
-ARG SPLITTER_VERSION=r653
+ARG MKGMAP_VERSION=r4919
+ARG SPLITTER_VERSION=r654
 
 WORKDIR /build
 RUN apt-get update && apt-get install -y wget unzip \
@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y wget unzip \
     && mv splitter-$SPLITTER_VERSION splitter
 
 FROM eclipse-temurin:17-jre
-COPY --from=builder /build/mkgmap //mkgmap
+COPY --from=builder /build/mkgmap /mkgmap
 COPY --from=builder /build/splitter /splitter
 
 ADD process.sh /process.sh
