@@ -1,0 +1,41 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-gradle
+
+name: Deploy to Docker Hub
+
+on:
+  release:
+    types: [published] # prereleased and released
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get latest release from Git
+        id: release-version
+        run: |
+          output=$(git ls-remote --refs --sort="version:refname" --tags $repo | cut -d/ -f3-|tail -n1)
+          echo "release_version=$output" >> $GITHUB_OUTPUT
+
+      - name: Build and Push Docker Image
+        uses: mr-smithers-excellent/docker-build-push@v6
+        with:
+          image: devshred/mkgmap
+          tags: latest, ${{steps.release-version.outputs.release_version}}
+          registry: docker.io
+          multiPlatform: false
+          platform: linux/amd64
+          dockerfile: Dockerfile
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
